@@ -83,13 +83,6 @@
 
 			function animateMenu() {
 				$this.data('animating', 1);
-				/*$menu.css({
-					left: $this.offset()
-						.left,
-					top: $this.offset()
-						.top + $this.height(),
-					zIndex: 5000
-				});*/
 
 				$menu.queue(function() {
 					$('.richMenuActive')
