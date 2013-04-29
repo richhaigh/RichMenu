@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head><title>richMenu</title>
+    <link rel='stylesheet' href='style/style.css' />
+	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+	<script type-'text/javascript' src='js/jquery.richmenu.min.js'></script>
+	<script type='text/javascript'>
+	$(document).ready(function(){
+		$('#menu1').richMenu({
+			events: 'click mousemove mousedown touchstart touchmove',
+			target: '#menu1-content',
+			effect: 'fade',
+			speed: 'fast',
+			position: 'bottom'
+		});
+	});
+	</script>
+  </head>
+  <body>
+	<div class='container'>
+      <h1>richMenu Demo</h1>
+      <h3>A fancy menu plugin for jQuery by Rich Haigh <sup>@Richmondo @Remoted</sup></h3>
+	  <div id='menu1'>Menu</div>
+	  <div id='menu1-content' style='border:1px solid #333;background:#ccc;'>
+		  <ul>
+			  <li>item 1</li>
+			  <li>item 2</li>
+		  </ul>
+	  </div>
+	</div>
+  </body>
+</html>
