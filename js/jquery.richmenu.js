@@ -3,18 +3,8 @@
 		return this.each(function() {
 			var $this = $(this);
 			var timer;
-
-			var options = {
-				events: settings.events || 'click', // trigger event click, mousemove, mousedown, touchstart, touchmove
-				effect: settings.effect || 'slide', // jquery animation effect either slide or fade
-				target: settings.target || null, // tagert element to be used as the menu content
-				timeout: settings.timeout || 500, // time out value for hiding the menu
-				speed: settings.speed || 'fast', // menu animation speed
-				position: settings.position || 'bottom', // menu position relative to the triggering element
-				onBefore: settings.onBefore || function() {}, // function to executer before
-				onEnd: settings.onEnd || function() {}, // function to execute after
-				onClick: settings.onClick || function() {} // function to execute when the trigger element is clicked on
-			};
+			
+			var options = $.extend({}, $.fn.richMenu.defaults, settings);
 
 			target = function() {
 				var target = options.target;
@@ -85,11 +75,7 @@
 				$this.data('animating', 1);
 
 				$menu.queue(function() {
-					$('.richMenuActive')
-						.each(function(index, elm) {
-						//	hideMenu($(elm));
-					});
-					options.onBefore($menu, this);
+					options.onBefore($menu, $this);
 					$menu.dequeue();
 				});
 				if ($menu.css('display') == 'none') {
@@ -114,13 +100,6 @@
 					$menu.dequeue();
 				});
 			}
-
-			function handleMenuClick(event) {
-				options.onClick(this, $menu, $this, event);
-				hideMenu($menu);
-				event.stopPropagation();
-			}
-
 
 			$menu.mouseenter(function() {
 				$menu.css({
@@ -160,8 +139,6 @@
 
 			function bindMenu(elm) {
 				$(elm)
-					.bind('click', handleMenuClick, false);
-				$(elm)
 					.children()
 					.each(
 
@@ -176,5 +153,16 @@
 				.join('.newmenu ')), handleUserEvent);
 			bindMenu($menu);
 		});
+	};
+	
+	$.fn.richMenu.defaults = {
+		events: 'click', // trigger event click, mouseover, mousemove, mousedown, touchstart, touchmove
+		effect: 'slide', // jquery animation effect either slide or fade
+		target: null, // tagert element to be used as the menu content
+		timeout: 500, // time out value for hiding the menu
+		speed: 'fast', // menu animation speed
+		position: 'bottom', // menu position relative to the triggering element
+		onBefore: function() {}, // function to executer before
+		onEnd: function() {} // function to execute after
 	};
 })(jQuery);
